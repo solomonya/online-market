@@ -1,0 +1,17 @@
+{
+  "name": "online-market",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": "git@github.com:solomonya/online-market.git",
+  "author": "solomon khan <hansolomon168@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/postgres": "^5.2.0",
+    "fastify": "^4.15.0",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0"
+  }
+}
