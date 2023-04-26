@@ -3,7 +3,11 @@ export class UserModel {
     this.userRepository = userRepository;
   }
 
-  getUsers() {
+  async getUsers() {
     return this.userRepository.getUsers();
+  }
+
+  async createUser(props) {
+    await this.userRepository.createUser(props);
   }
 }

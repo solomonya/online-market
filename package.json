@@ -11,6 +11,7 @@
   "dependencies": {
     "@fastify/postgres": "^5.2.0",
     "fastify": "^4.15.0",
+    "fastify-plugin": "^4.5.0",
     "nodemon": "^2.0.22",
     "pg": "^8.10.0"
   }

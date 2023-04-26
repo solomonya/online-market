@@ -2,17 +2,18 @@
 import Fastify from 'fastify';
 import fastifyPostgres from '@fastify/postgres';
 import { userDomain } from './domains/user/index.js';
+import { authDomain } from './domains/auth/auth.domain.js';
 
 const fastify = Fastify({
   logger: true
 })
 
-//TODO: NEED TO RESET PASS
 fastify.register(fastifyPostgres, {
-  connectionString: ""
+  connectionString: "postgresql://postgres:AiDaNuRbOlAt2&$3@db.xzcvlfryrnbfyqpvgymp.supabase.co:5432/postgres"
 });
 
 fastify.register(userDomain);
+fastify.register(authDomain, { userModel: fastify.userModel });
 
 fastify.get('/', async (request, reply) => {
   try {

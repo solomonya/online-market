@@ -5,7 +5,14 @@ export class UserRepository {
     this.db = fastify.pg;
   }
 
-  getUsers() {
-    return users;
+  async getUsers() {
+    const statement = 'SELECT * FROM customers'
+    const { rows } = await this.db.query(statement);
+    return rows;
   };
+
+  async createUser(props) {
+    const { email, password } = props;
+    console.log(email, password); 
+  }
 }
