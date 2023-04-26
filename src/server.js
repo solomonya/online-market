@@ -1,6 +1,8 @@
-// ESM
 import Fastify from 'fastify';
 import fastifyPostgres from '@fastify/postgres';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { userDomain } from './domains/user/index.js';
 import { authDomain } from './domains/auth/auth.domain.js';
 
@@ -9,7 +11,7 @@ const fastify = Fastify({
 })
 
 fastify.register(fastifyPostgres, {
-  connectionString: "postgresql://postgres:AiDaNuRbOlAt2&$3@db.xzcvlfryrnbfyqpvgymp.supabase.co:5432/postgres"
+  connectionString: process.env.DB_URL
 });
 
 fastify.register(userDomain);
@@ -17,7 +19,7 @@ fastify.register(authDomain, { userModel: fastify.userModel });
 
 fastify.get('/', async (request, reply) => {
   try {
-    reply.send({ hello: 'world' });
+    reply.send({ online_market: 'api' });
   } catch(e) {
     reply.send(e);
   }
@@ -25,7 +27,7 @@ fastify.get('/', async (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 })
+    await fastify.listen({ port: process.env.PORT })
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)

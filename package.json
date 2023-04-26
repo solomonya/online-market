@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@fastify/postgres": "^5.2.0",
+    "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "fastify-plugin": "^4.5.0",
     "nodemon": "^2.0.22",
