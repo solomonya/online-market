@@ -17,7 +17,6 @@ fastify.register(fastifyPostgres, {
 });
 
 fastify.register(userDomain);
-fastify.register(authDomain, { userModel: fastify.userModel });
 fastify.register(productDomain);
 fastify.register(orderDomain);
 

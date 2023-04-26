@@ -1,5 +1,3 @@
-const users = [{ name: 'Jhon Doe', email: "javascript@hater.com" }, { name: "n2749", email: "loveJavaSoMuch@gmail.com" }];
-
 export class UserRepository {
   constructor(fastify) {
     this.db = fastify.pg;
@@ -13,6 +11,7 @@ export class UserRepository {
 
   async createUser(props) {
     const { email, password } = props;
-    console.log(email, password); 
+    const statement = 'INSERT INTO customers (email, password) VALUES ($1, $2)';
+    await this.db.query(statement, [email, password]); 
   }
 }
