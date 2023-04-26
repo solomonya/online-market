@@ -1,6 +1,7 @@
 // ESM
 import Fastify from 'fastify';
 import fastifyPostgres from '@fastify/postgres';
+import { userDomain } from './domains/user/index.js';
 
 const fastify = Fastify({
   logger: true
@@ -11,10 +12,11 @@ fastify.register(fastifyPostgres, {
   connectionString: ""
 });
 
+fastify.register(userDomain);
+
 fastify.get('/', async (request, reply) => {
   try {
-    const results = await fastify.pg.query('SELECT * from orders');
-    reply.send(results);
+    reply.send({ hello: 'world' });
   } catch(e) {
     reply.send(e);
   }
@@ -28,4 +30,5 @@ const start = async () => {
     process.exit(1)
   }
 }
-start()
+
+start();
