@@ -1,7 +1,8 @@
 import { authRoutes } from "./auth.routes.js";
 
 function authDomain(fastify, options, done) {
-  fastify.register(authRoutes, { prefix: '/auth' });
+  const { userModel } = options;
+  fastify.register(authRoutes, { prefix: '/auth', userModel });
   done();
 }
 

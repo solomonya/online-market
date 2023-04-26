@@ -15,7 +15,6 @@ fastify.register(fastifyPostgres, {
 });
 
 fastify.register(userDomain);
-fastify.register(authDomain, { userModel: fastify.userModel });
 
 fastify.get('/', async (request, reply) => {
   try {

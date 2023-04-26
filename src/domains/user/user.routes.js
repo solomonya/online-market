@@ -7,9 +7,4 @@ export async function userRoutes(fastify, options) {
     const users = await userModel.getUsers();
     reply.send(users);
   })
-
-  fastify.post('/register/', { schema: createUserSchema }, async (request, reply) =>  {
-    await userModel.createUser(request.body);
-    reply.status(200).send({ success: true });
-  })
 }
