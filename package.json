@@ -13,7 +13,11 @@
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "fastify-plugin": "^4.5.0",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.22",
     "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2"
   }
 }
