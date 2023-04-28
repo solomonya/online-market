@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js",
+    "format": "npx prettier -w \"./src/**/*.js\"",
+    "lint": "npx eslint --fix \"./src/**/*.js\""
   },
   "repository": "git@github.com:solomonya/online-market.git",
   "author": "solomon khan <hansolomon168@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@fastify/postgres": "^5.2.0",
+    "@supabase/supabase-js": "^2.21.0",
+    "@types/node": "^18.16.2",
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "fastify-plugin": "^4.5.0",
@@ -18,6 +22,9 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.2"
+    "@types/jsonwebtoken": "^9.0.2",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.8"
   }
 }

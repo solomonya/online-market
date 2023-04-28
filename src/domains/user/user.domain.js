@@ -7,11 +7,11 @@ import { authDomain } from "../auth/auth.domain.js";
 function userPlugin(fastify, options, done) {
   const userRepository = new UserRepository(fastify);
   const userModel = new UserModel(userRepository);
-  
-  fastify.decorate('userModel', userModel);
-  fastify.register(userRoutes, { prefix: '/users', userModel });
+
+  fastify.decorate("userModel", userModel);
+  fastify.register(userRoutes, { prefix: "/users", userModel });
   fastify.register(authDomain, { userModel });
-  
+
   done();
 }
 
