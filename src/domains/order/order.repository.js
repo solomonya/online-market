@@ -20,17 +20,13 @@ export class OrderRepository {
   }
 
   async fillItems(items, order_id) {
-    const items_placeholders = items.map((_, i) => `($${i + 1})`).join(", ");
-    const statement = `INSERT INTO items (product_id, order_id, quantity) VALUES ${items_placeholders}`;
-    const prepared_items = items.map(({ product_id, quantity }) => [
-      product_id,
-      Number(order_id),
-      quantity,
-    ]);
-    console.log('====================================')
+    const items_placeholders = items
+      .map(({ product_id, quantity }) => `(${product_id}, ${order_id}, ${quantity})`)
+      .join(", ");
+    const statement = `INSERT INTO items (product_id, order_id, quantity) VALUES ${items_placeholders};`;
+    console.log("====================================");
     console.log("statement ", statement);
-    console.log("prepared_items", prepared_items);
-    console.log('====================================')
-    await this.db.query(statement, prepared_items);
+    console.log("====================================");
+    await this.db.query(statement);
   }
 }
