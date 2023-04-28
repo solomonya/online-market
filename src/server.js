@@ -5,8 +5,8 @@ dotenv.config();
 
 import { userDomain } from "./domains/user/index.js";
 import { productDomain } from "./domains/product/product.domain.js";
-import { orderDomain } from "./domains/order/order.domain.js";
 import { generateToken } from "./utils/jwt.js";
+import { paymentDomain } from "./domains/payment/payment.domain.js";
 
 const fastify = Fastify({
   logger: true,
@@ -16,11 +16,11 @@ fastify.register(fastifyPostgres, {
   connectionString: process.env.DB_URL,
 });
 
-fastify.decorate('generateToken', generateToken);
+fastify.decorate("generateToken", generateToken);
 
 fastify.register(userDomain);
 fastify.register(productDomain);
-fastify.register(orderDomain);
+fastify.register(paymentDomain);
 
 fastify.get("/", async (request, reply) => {
   try {

@@ -1,20 +1,34 @@
 export class OrderModel {
-    constructor(orderRepository) {
-      this.orderRepository = orderRepository;
-    }
-  
-    async getOrdersByUser(props) {
-      return this.orderRepository.getOrdersByUser(props);
-    }
-
-    async createNewOrder(props) {
-      const { customer_id, items } = props;
-      const order = { 
-        orderId: Math.random() * 100, 
-        customer_id, 
-        dateOfShipping: new Date().toDateString(),
-        total: 200 
-      };
-      return order;
-    }
+  constructor(orderRepository, paymentModel, productModel) {
+    this.orderRepository = orderRepository;
+    this.paymentModel = paymentModel;
+    this.productModel = productModel;
   }
+
+  async getOrdersByUser(props) {
+    return this.orderRepository.getOrdersByUser(props);
+  }
+
+  async createNewOrder(props) {
+    const { items } = props;
+    const totalPrice = await this.#calculateTotal(items);
+    
+    return this.orderRepository.createNewOrder({ ...props, totalAmount: totalPrice });
+  }
+
+  #calculateTotal = async items => {
+    const productsIds = items.map(({ product_id }) => product_id);
+    const products = await this.productModel.getProductsByIds(productsIds);
+
+    const productsQuantityDict = Object.fromEntries(items.map(({ product_id, quantity }) => [product_id, quantity]));
+
+    
+    const calculatedTotalPrice = products.reduce((acc, product) => {
+      const quantity = productsQuantityDict[product.product_id];
+      acc += quantity * parseFloat(product.price);
+      return acc;
+    }, 0);
+    
+    return calculatedTotalPrice;
+  };
+}

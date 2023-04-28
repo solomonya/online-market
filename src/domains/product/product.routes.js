@@ -8,7 +8,7 @@ export async function productRoutes(fastify, options) {
 
   fastify.get("/:id", async (request, reply) => {
     const product = await productModel.getProduct(request.params);
-    console.log(product)
+    console.log(product);
     reply.send(product);
   });
 }

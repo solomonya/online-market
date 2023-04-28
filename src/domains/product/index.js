@@ -1,5 +1,5 @@
-import { ProductDomain } from "./product.domain.js";
+import { productDomain } from "./product.domain.js";
 import { ProductModel } from "./product.model.js";
 import { ProductRepository } from "./product.repositoty.js";
 
-export { ProductDomain, ProductModel, ProductRepository };
+export { productDomain, ProductModel, ProductRepository };

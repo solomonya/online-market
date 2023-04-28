@@ -15,4 +15,10 @@ export class ProductRepository {
     const { rows } = await this.db.query(statement, [id]);
     return rows;
   }
+
+  async getByIds(ids) {
+    const statement = "SELECT * FROM products WHERE product_id = ANY($1::int[])";
+    const { rows } = await this.db.query(statement, [ids]);
+    return rows;
+  }
 }
