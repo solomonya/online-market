@@ -14,11 +14,6 @@ export class ProductRepository {
   async getProduct(params) {
     const { id } = params;
 
-    const filePath = `static/images/products/${id}.jpg`;
-    const { data, error } = await this.supabase.storage.from("images").download("public/1.jpg");
-    const buffer = Buffer.from(await data.arrayBuffer());
-    await this.fs.promises.writeFile(filePath, buffer);
-
     const statement = "SELECT * FROM products WHERE product_id = $1";
     const { rows } = await this.db.query(statement, [id]);
     return rows;

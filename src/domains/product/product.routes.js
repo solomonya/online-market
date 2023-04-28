@@ -6,7 +6,7 @@ export async function productRoutes(fastify, options) {
       .from("get_products_with_providers")
       .execute();
     
-      reply.status(200).send(products);
+    reply.status(200).send(products);
   });
 
   fastify.get("/:id", async (request, reply) => {
