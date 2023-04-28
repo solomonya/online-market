@@ -13,6 +13,6 @@ export class ProductModel {
 
   async getProductsByIds(ids) {
     const products = await this.productRepository.getByIds(ids);
-    return products; 
+    return products;
   }
 }

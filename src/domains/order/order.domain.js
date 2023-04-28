@@ -12,7 +12,7 @@ function orderDomain(fastify, _, done) {
   const productModel = new ProductModel(productRepository);
 
   const orderRepository = new OrderRepository(fastify);
-  
+
   const orderModel = new OrderModel(orderRepository, paymentModel, productModel);
 
   fastify.register(orderRoutes, { prefix: "/orders", orderModel });
