@@ -4,7 +4,7 @@ export class ProductRepository {
   }
 
   async getProducts() {
-    const statement = "SELECT * FROM products";
+    const statement = "SELECT * FROM get_products_with_providers";
     const { rows } = await this.db.query(statement);
     return rows;
   }

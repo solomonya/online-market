@@ -13,7 +13,9 @@ export class OrderModel {
     const { items } = props;
     const totalPrice = await this.#calculateTotal(items);
     
-    return this.orderRepository.createNewOrder({ ...props, totalAmount: totalPrice });
+    const created_order = await this.orderRepository.createNewOrder({ ...props, totalAmount: totalPrice });
+    await this.orderRepository.fillItems(items, created_order.order_id);
+    return created_order;
   }
 
   #calculateTotal = async items => {
