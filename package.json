@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@fastify/postgres": "^5.2.0",
+    "@supabase/supabase-js": "^2.21.0",
     "@types/node": "^18.16.2",
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
