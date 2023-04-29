@@ -10,6 +10,12 @@ export async function orderRoutes(fastify, options) {
     reply.send(order);
   });
 
+  fastify.get("/:id", { preValidation: [checkAuth] }, async (request, reply) => {
+    const { id } = request.params;
+    const order = await orderModel.getOrderById({ order_id: id });
+    reply.send(order);
+  });
+
   fastify.post("/", { preValidation: [checkAuth] }, async (request, reply) => {
     const { customer_id, region } = request.token;
     const { items } = request.body;

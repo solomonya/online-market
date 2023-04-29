@@ -9,6 +9,10 @@ export class OrderModel {
     return this.orderRepository.getOrdersByUser(props);
   }
 
+  async getOrderById(props) {
+    return this.orderRepository.getOrderById(props);
+  }
+
   async createNewOrder(props) {
     const { items } = props;
     const totalPrice = await this.#calculateTotal(items);

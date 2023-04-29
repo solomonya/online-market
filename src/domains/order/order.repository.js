@@ -10,6 +10,14 @@ export class OrderRepository {
     return rows;
   }
 
+  async getOrderById(params) {
+    const { order_id } = params;
+    const statement = "SELECT * FROM orders WHERE order_id = $1";
+    const { rows } = await this.db.query(statement, [order_id]);
+    console.log(order_id);
+    return rows[0];
+  }
+
   async createNewOrder(params) {
     const { customer_id, region, totalAmount } = params;
 
