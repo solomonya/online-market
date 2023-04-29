@@ -27,7 +27,10 @@ class QueryBuilder {
   where(conditions) {
     if (!conditions) return this;
 
-    if (Array.isArray(conditions)) this.whereConditions = [...this.whereConditions, ...conditions];
+    if (Array.isArray(conditions)) {
+      const filteredConditions = conditions.filter(Boolean);
+      this.whereConditions = [...this.whereConditions, ...filteredConditions];
+    }
     else this.whereConditions.push(conditions);
 
     return this;
