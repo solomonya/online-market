@@ -23,7 +23,7 @@ fastify.register(fastifyPostgres, {
 fastify.register(fastifyCors, {
   origin: "http://localhost:5173",
   methods: ["GET", "PUT", "POST", "DELETE"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 204,
 });
 
