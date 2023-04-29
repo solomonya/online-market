@@ -2,10 +2,8 @@ export async function productRoutes(fastify, options) {
   const { productModel, queryBuilder } = options;
 
   fastify.get("/", async (request, reply) => {
-    const products = await queryBuilder
-      .from("get_products_with_providers")
-      .execute();
-    
+    const products = await queryBuilder.from("get_products_with_providers").execute();
+
     reply.status(200).send(products);
   });
 

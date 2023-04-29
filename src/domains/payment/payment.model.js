@@ -5,13 +5,13 @@ class PaymentModel {
 
   async createNewPayment(params) {
     console.log("CREATE NEW PAYMENT PARAMS -->", params);
-    const { order_id, customer_id, } = params;
+    const { order_id, customer_id } = params;
     const total = await this.paymentRepository.getOrderTotal({ order_id });
     const balance = await this.paymentRepository.getUserBalance({ customer_id });
 
     console.log("TOTAL -->", total);
-    
-    if(balance < total) {
+
+    if (balance < total) {
       throw new Error("Баланс недостаточен для совершения транзакции!");
     }
 

@@ -25,7 +25,7 @@ class QueryBuilder {
   }
 
   where(conditions) {
-    if(!conditions) return this;
+    if (!conditions) return this;
 
     if (Array.isArray(conditions)) this.whereConditions = [...this.whereConditions, ...conditions];
     else this.whereConditions.push(conditions);

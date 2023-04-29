@@ -9,12 +9,10 @@ import { generateToken } from "./utils/jwt.js";
 import { paymentDomain } from "./domains/payment/payment.domain.js";
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
+import fastifyCors from "@fastify/cors";
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.PUBLIC_KEY,
-);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.PUBLIC_KEY);
 const fastify = Fastify({
   logger: true,
 });
@@ -22,10 +20,16 @@ const fastify = Fastify({
 fastify.register(fastifyPostgres, {
   connectionString: process.env.DB_URL,
 });
+fastify.register(fastifyCors, {
+  origin: "http://localhost:5173",
+  methods: ["GET", "PUT", "POST", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+  optionsSuccessStatus: 204,
+});
 
 fastify.decorate("generateToken", generateToken);
-fastify.decorate('supabase', supabase);
-fastify.decorate('fs', fs);
+fastify.decorate("supabase", supabase);
+fastify.decorate("fs", fs);
 
 fastify.register(userDomain);
 fastify.register(productDomain);

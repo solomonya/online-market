@@ -7,16 +7,16 @@ async function paymentRoutes(fastify, options) {
     const { id } = request.params;
     console.log("ORDER ID -->", request.params);
     const { balance, customer_id } = request.token;
-    
+
     try {
       const result = await paymentModel.createNewPayment({
         order_id: id,
         balance: parseFloat(balance),
-        customer_id
+        customer_id,
       });
 
       reply.status(200).send(result);
-    } catch(e) {
+    } catch (e) {
       reply.status(400).send({ message: e.message });
     }
   });
