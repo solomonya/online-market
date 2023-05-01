@@ -11,4 +11,9 @@ export async function productRoutes(fastify, options) {
     const product = await productModel.getProduct(request.params);
     reply.status(200).send(product);
   });
+
+  fastify.get("/providers", async (request, reply) => {
+    const providers = await productModel.getProviders();
+    reply.status(200).send(providers);
+  });
 }

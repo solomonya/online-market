@@ -4,6 +4,12 @@ export class ProductModel {
     this.queryBuilder = queryBuilder;
   }
 
+  async getProviders() {
+    return await this.queryBuilder
+      .from("providers")
+      .execute();
+  }
+
   async getProducts({ queryParams }) {
     const {
       min_price,
