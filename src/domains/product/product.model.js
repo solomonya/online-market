@@ -33,10 +33,8 @@ export class ProductModel {
 
     const products = await statement.execute();
 
-    const productsCount = await this.productRepository.getProductsCount();
-
     return {
-      count: productsCount.count,
+      count: products.length,
       results: products,
     };
   }
