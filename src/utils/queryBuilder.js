@@ -84,7 +84,7 @@ class QueryBuilder {
       this.reset();
       return rows;
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
   }
 }

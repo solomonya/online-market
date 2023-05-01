@@ -30,4 +30,10 @@ export class ProductRepository {
     const { rows } = await this.db.query(statement);
     return rows[0];
   }
+
+  async getProviders() {
+    const statement = "SELECT * FROM providers";
+    const { rows } = await this.db.query(statement);
+    return rows;
+  }
 }

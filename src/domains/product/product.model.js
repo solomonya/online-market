@@ -5,9 +5,7 @@ export class ProductModel {
   }
 
   async getProviders() {
-    return await this.queryBuilder
-      .from("providers")
-      .execute();
+    return await this.productRepository.getProviders();
   }
 
   async getProducts({ queryParams }) {
