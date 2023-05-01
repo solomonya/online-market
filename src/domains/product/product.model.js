@@ -32,9 +32,10 @@ export class ProductModel {
       .setOffset(offset);
 
     const products = await statement.execute();
+    const productsCount = await this.productRepository.getProductsCount();
 
     return {
-      count: products.length,
+      count: productsCount.count,
       results: products,
     };
   }
