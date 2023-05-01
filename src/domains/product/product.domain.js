@@ -6,9 +6,9 @@ import { productRoutes } from "./product.routes.js";
 function productDomain(fastify, _, done) {
   const queryBuilder = new QueryBuilder(fastify.pg);
   const productRepository = new ProductRepository(fastify);
-  const productModel = new ProductModel(productRepository);
+  const productModel = new ProductModel(productRepository, queryBuilder);
 
-  fastify.register(productRoutes, { prefix: "/products", productModel, queryBuilder });
+  fastify.register(productRoutes, { prefix: "/products", productModel });
   done();
 }
 

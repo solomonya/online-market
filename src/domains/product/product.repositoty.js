@@ -24,4 +24,10 @@ export class ProductRepository {
     const { rows } = await this.db.query(statement, [ids]);
     return rows;
   }
+
+  async getProductsCount() {
+    const statement = "SELECT COUNT(*) FROM products";
+    const { rows } = await this.db.query(statement);
+    return rows[0];
+  }
 }

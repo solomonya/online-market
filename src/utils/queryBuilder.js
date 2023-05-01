@@ -5,6 +5,8 @@ class QueryBuilder {
     this.selectFields = "*";
     this.whereConditions = [];
     this.orderByFields = [];
+    this.limit = 10;
+    this.offset = 0;
   }
 
   reset() {
@@ -12,6 +14,8 @@ class QueryBuilder {
     this.selectFields = "*";
     this.whereConditions = [];
     this.orderByFields = [];
+    this.offset = 0;
+    this.limit = 10;
   }
 
   from(tableName) {
@@ -30,14 +34,29 @@ class QueryBuilder {
     if (Array.isArray(conditions)) {
       const filteredConditions = conditions.filter(Boolean);
       this.whereConditions = [...this.whereConditions, ...filteredConditions];
-    }
-    else this.whereConditions.push(conditions);
+    } else this.whereConditions.push(conditions);
 
     return this;
   }
 
   orderBy(field, direction = "ASC") {
+    if (!field) return this;
+
     this.orderByFields.push(`${field} ${direction.toUpperCase()}`);
+    return this;
+  }
+
+  setLimit(limit) {
+    if (!limit) return this;
+
+    this.limit = limit;
+    return this;
+  }
+
+  setOffset(offset) {
+    if (!offset) return this;
+
+    this.offset = offset;
     return this;
   }
 
@@ -56,12 +75,16 @@ class QueryBuilder {
       queryString += " ORDER BY " + this.orderByFields.join(", ");
     }
 
+    queryString += ` LIMIT ${this.limit} OFFSET ${this.offset}`;
+
+    console.log(queryString);
+
     try {
       const { rows } = await this.db.query(queryString);
       this.reset();
       return rows;
     } catch (err) {
-      throw err;
+      console.err(err);
     }
   }
 }
